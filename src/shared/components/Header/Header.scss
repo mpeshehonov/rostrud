@@ -1,0 +1,15 @@
+.header {
+  > * {
+    float: left;
+  }
+  .logo, .logo a, .logo a:hover {
+    color: white;
+    margin-right: 150px;
+  }
+  .user {
+    float: right;
+    color: white;
+  }
+}
+
+
