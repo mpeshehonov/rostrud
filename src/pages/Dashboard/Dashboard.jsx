@@ -7,6 +7,7 @@ import moment from 'moment';
 import 'moment/locale/ru';
 import locale from 'antd/lib/locale/ru_RU';
 import BubbleChart from './BubbleChart';
+import RadarChart from './RadarChart';
 
 const { RangePicker } = DatePicker;
 const monthFormat = 'MM.YYYY';
@@ -31,8 +32,11 @@ const Dashboard = () => {
         </Col>
       </Row>
       <Row>
-        <Col span={24}>
+        <Col span={12}>
           <BubbleChart/>
+        </Col>
+        <Col span={12}>
+          <RadarChart/>
         </Col>
       </Row>
     </>
