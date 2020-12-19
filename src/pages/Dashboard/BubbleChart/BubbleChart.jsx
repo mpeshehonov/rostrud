@@ -4,7 +4,7 @@ import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 import am4langRu from '@amcharts/amcharts4/lang/ru_RU';
-import {Card} from 'antd';
+import {Card, Badge, Space} from 'antd';
 
 am4core.useTheme(am4themes_animated);
 
@@ -1602,7 +1602,13 @@ const BubbleChart = () => {
 
   return (
     <Card title="Области" bordered={false}>
-      <div id="bubbleChart" style={{width: "100%", height: "600px"}} />
+      <div id="bubbleChart" style={{width: '100%', height: '600px'}} />
+      <div className="box-center">
+        <Space align="center">
+          <Badge color="#f50" text="Профессия" />
+          <Badge color="#2db7f5" text="Значение" />
+        </Space>
+      </div>
     </Card>
   )
 }

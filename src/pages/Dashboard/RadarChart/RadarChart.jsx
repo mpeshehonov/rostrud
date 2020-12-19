@@ -1,4 +1,3 @@
-
 import React, {useLayoutEffect} from 'react';
 import './styles.scss';
 import * as am4core from '@amcharts/amcharts4/core';
@@ -11,52 +10,36 @@ am4core.useTheme(am4themes_animated);
 
 const chartData = [
   {
-    country: "USA",
-    visits: 23725
+    region: 'ЦФО',
+    value: 23725
   },
   {
-    country: "China",
-    visits: 1882
+    region: 'СЗФО',
+    value: 1882
   },
   {
-    country: "Japan",
-    visits: 1809
+    region: 'ЮФО',
+    value: 1809
   },
   {
-    country: "Germany",
-    visits: 1322
+    region: 'СКФО',
+    value: 1322
   },
   {
-    country: "UK",
-    visits: 1122
+    region: 'ПФО',
+    value: 1122
   },
   {
-    country: "France",
-    visits: 1114
+    region: 'УФО',
+    value: 1114
   },
   {
-    country: "India",
-    visits: 984
+    region: 'СФО',
+    value: 984
   },
   {
-    country: "Spain",
-    visits: 711
-  },
-  {
-    country: "Netherlands",
-    visits: 665
-  },
-  {
-    country: "Russia",
-    visits: 580
-  },
-  {
-    country: "South Korea",
-    visits: 443
-  },
-  {
-    country: "Canada",
-    visits: 441
+    region: 'ДФО',
+    value: 711
   }
 ];
 
@@ -72,13 +55,13 @@ const RadarChart = () => {
 
     let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
     categoryAxis.renderer.grid.template.location = 0;
-    categoryAxis.dataFields.category = "country";
+    categoryAxis.dataFields.category = 'region';
     categoryAxis.renderer.labels.template.location = 0.5;
     categoryAxis.renderer.grid.template.strokeOpacity = 0.08;
     categoryAxis.renderer.tooltipLocation = 0.5;
     categoryAxis.tooltip.disabled = true;
     categoryAxis.renderer.labels.template.bent = true;
-    categoryAxis.renderer.labels.template.padding(0,0,0,0);
+    categoryAxis.renderer.labels.template.padding(0, 0, 0, 0);
     categoryAxis.renderer.labels.template.radius = 7;
 
     let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
@@ -96,7 +79,7 @@ const RadarChart = () => {
     axisBreak.breakSize = 0.02;
 
 // make break expand on hover
-    let hoverState = axisBreak.states.create("hover");
+    let hoverState = axisBreak.states.create('hover');
     hoverState.properties.breakSize = 1;
     hoverState.properties.opacity = 0.1;
     hoverState.transitionDuration = 1500;
@@ -104,16 +87,16 @@ const RadarChart = () => {
     axisBreak.defaultState.transitionDuration = 1000;
 
     let series = chart.series.push(new am4charts.RadarColumnSeries());
-    series.dataFields.categoryX = "country";
-    series.dataFields.valueY = "visits";
-    series.columns.template.tooltipText = "{valueY.value}";
+    series.dataFields.categoryX = 'region';
+    series.dataFields.valueY = 'value';
+    series.columns.template.tooltipText = '{valueY.value}';
     series.columns.template.tooltipY = 0;
     series.columns.template.strokeOpacity = 0;
 
     chart.seriesContainer.zIndex = -1;
 
     // as by default columns of the same series are of the same color, we add adapter which takes colors from chart.colors color set
-    series.columns.template.adapter.add("fill", function(fill, target) {
+    series.columns.template.adapter.add('fill', function (fill, target) {
       return chart.colors.getIndex(target.dataItem.index);
     });
 
@@ -129,8 +112,8 @@ const RadarChart = () => {
     };
   }, [])
   return (
-    <Card title="Радар" bordered={false}>
-      <div id="radarChart" style={{width: "100%", height: "600px"}} />
+    <Card title="Округа" bordered={false}>
+      <div id="radarChart" style={{width: '100%', height: '600px'}} />
     </Card>
   )
 }
