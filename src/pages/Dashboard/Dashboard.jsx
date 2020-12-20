@@ -6,8 +6,9 @@ import TagCloudChart from './TagCloudChart';
 import moment from 'moment';
 import 'moment/locale/ru';
 import locale from 'antd/lib/locale/ru_RU';
-import BubbleChart from './BubbleChart';
 import RadarChart from './RadarChart';
+import AreaChart from './AreaChart';
+import TreeMapChart from './TreeMapChart';
 
 const { RangePicker } = DatePicker;
 const monthFormat = 'MM.YYYY';
@@ -33,10 +34,15 @@ const Dashboard = () => {
       </Row>
       <Row>
         <Col span={12}>
-          <BubbleChart/>
+          <AreaChart/>
         </Col>
         <Col span={12}>
           <RadarChart/>
+        </Col>
+      </Row>
+      <Row>
+        <Col span={24}>
+          <TreeMapChart/>
         </Col>
       </Row>
     </>

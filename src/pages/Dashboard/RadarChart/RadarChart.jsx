@@ -1,49 +1,21 @@
-import React, {useLayoutEffect} from 'react';
+import React, {useEffect, useState, useLayoutEffect} from 'react';
 import './styles.scss';
 import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 import am4langRu from '@amcharts/amcharts4/lang/ru_RU';
 import {Card} from 'antd';
+import axios from 'axios';
 
 am4core.useTheme(am4themes_animated);
 
-const chartData = [
-  {
-    region: 'ЦФО',
-    value: 23725
-  },
-  {
-    region: 'СЗФО',
-    value: 1882
-  },
-  {
-    region: 'ЮФО',
-    value: 1809
-  },
-  {
-    region: 'СКФО',
-    value: 1322
-  },
-  {
-    region: 'ПФО',
-    value: 1122
-  },
-  {
-    region: 'УФО',
-    value: 1114
-  },
-  {
-    region: 'СФО',
-    value: 984
-  },
-  {
-    region: 'ДФО',
-    value: 711
-  }
-];
-
 const RadarChart = () => {
+  const [chartData, setChartData] = useState([]);
+
+  useEffect(() => {
+    axios.get('/data/pie.json').then((r) => setChartData(r.data));
+  }, [])
+
   useLayoutEffect(() => {
     let chart = am4core.create('radarChart', am4charts.RadarChart);
     chart.language.locale = am4langRu;
@@ -52,6 +24,10 @@ const RadarChart = () => {
     chart.startAngle = -80;
     chart.endAngle = 260;
     chart.data = chartData;
+
+    let title = chart.titles.create();
+    title.text = '[bold font-size: 20]Округа[/]';
+    title.textAlign = 'middle';
 
     let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
     categoryAxis.renderer.grid.template.location = 0;
@@ -72,13 +48,11 @@ const RadarChart = () => {
     valueAxis.renderer.grid.template.strokeOpacity = 0.08;
     valueAxis.tooltip.disabled = true;
 
-// axis break
     let axisBreak = valueAxis.axisBreaks.create();
     axisBreak.startValue = 2100;
     axisBreak.endValue = 22900;
     axisBreak.breakSize = 0.02;
 
-// make break expand on hover
     let hoverState = axisBreak.states.create('hover');
     hoverState.properties.breakSize = 1;
     hoverState.properties.opacity = 0.1;
@@ -110,9 +84,9 @@ const RadarChart = () => {
     return () => {
       chart.dispose();
     };
-  }, [])
+  }, [chartData])
   return (
-    <Card title="Округа" bordered={false}>
+    <Card bordered={false}>
       <div id="radarChart" style={{width: '100%', height: '600px'}} />
     </Card>
   )

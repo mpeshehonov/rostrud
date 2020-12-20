@@ -21,6 +21,10 @@ const TagCloudChart = () => {
     chart.language.locale = am4langRu;
     chart.data = chartData;
 
+    let title = chart.titles.create();
+    title.text = '[bold font-size: 20]Пострадавшие профессии[/]';
+    title.textAlign = 'middle';
+
     let series = chart.series.push(new am4plugins_wordCloud.WordCloudSeries());
     series.randomness = 0.1;
     series.rotationThreshold = 0.5;
@@ -31,13 +35,13 @@ const TagCloudChart = () => {
     series.heatRules.push({
       'target': series.labels.template,
       'property': 'fill',
-      'min': am4core.color('#0f0'),
-      'max': am4core.color('#f00'),
+      'min': am4core.color('#00c'),
+      'max': am4core.color('#c0c'),
       'dataField': 'value'
     });
 
     let hoverState = series.labels.template.states.create('hover');
-    hoverState.properties.fill = am4core.color('#c0c');
+    hoverState.properties.fill = am4core.color('#f00');
 
     return () => {
       chart.dispose();
@@ -45,12 +49,12 @@ const TagCloudChart = () => {
   }, [chartData])
 
   return (
-    <Card title="Профессии" bordered={false}>
+    <Card bordered={false}>
       <div id="tagCloudChart" style={{width: '100%', height: '600px'}} />
       <div className="box-center">
         <Space align="center">
-          <Badge color="#0f0" text="Мало увольнений" />
-          <Badge color="#f00" text="Много увольнений" />
+          <Badge color="#00c" text="Мало увольнений" />
+          <Badge color="#c0c" text="Много увольнений" />
         </Space>
       </div>
     </Card>

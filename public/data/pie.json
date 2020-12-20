@@ -1,0 +1,34 @@
+[
+  {
+    "region": "ЦФО",
+    "value": 23725
+  },
+  {
+    "region": "СЗФО",
+    "value": 1882
+  },
+  {
+    "region": "ЮФО",
+    "value": 1809
+  },
+  {
+    "region": "СКФО",
+    "value": 1322
+  },
+  {
+    "region": "ПФО",
+    "value": 1122
+  },
+  {
+    "region": "УФО",
+    "value": 1114
+  },
+  {
+    "region": "СФО",
+    "value": 984
+  },
+  {
+    "region": "ДФО",
+    "value": 711
+  }
+]

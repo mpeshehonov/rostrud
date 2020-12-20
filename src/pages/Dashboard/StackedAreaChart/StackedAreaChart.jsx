@@ -21,15 +21,24 @@ const StackedAreaChart = () => {
     chart.language.locale = am4langRu;
     chart.data = chartData;
 
-    chart.dateFormatter.inputDateFormat = 'mm.yyyy';
+    let title = chart.titles.create();
+    title.text = '[bold font-size: 20]Пособия[/]';
+    title.textAlign = 'middle';
+
+    chart.dateFormatter.inputDateFormat = 'MM.YYYY';
     const dateAxis = chart.xAxes.push(new am4charts.DateAxis());
     dateAxis.renderer.minGridDistance = 60;
     dateAxis.startLocation = 0;
     dateAxis.endLocation = 1;
-    dateAxis.baseInterval = {
-      timeUnit: 'month',
-      count: 1
-    };
+    dateAxis.baseInterval = {timeUnit: 'month', count: 1};
+    dateAxis.gridIntervals.setAll([
+      {timeUnit: 'month', count: 2},
+      {timeUnit: 'year', count: 1}
+    ]);
+    dateAxis.groupIntervals.setAll([
+      {timeUnit: 'month', count: 2},
+      {timeUnit: 'year', count: 1}
+    ]);
 
     const valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
     valueAxis.tooltip.disabled = true;
@@ -39,12 +48,13 @@ const StackedAreaChart = () => {
     series.name = 'Занятые';
     series.dataFields.valueY = 'work';
     series.tooltipText = '[#000]{valueY.value}[/]';
-    series.tooltip.getStrokeFromObject = true;
     series.tooltip.getFillFromObject = true;
+    series.tooltip.getStrokeFromObject = true;
     series.tooltip.background.strokeWidth = 3;
+    series.sequencedInterpolation = true;
     series.fillOpacity = 0.6;
-    series.strokeWidth = 2;
     series.stacked = true;
+    series.strokeWidth = 2;
 
     const series2 = chart.series.push(new am4charts.LineSeries());
     series2.name = 'Пособие';
@@ -74,11 +84,10 @@ const StackedAreaChart = () => {
     series3.strokeWidth = 2;
 
     const range = dateAxis.axisRanges.create();
-    range.date = new Date(2019, 0, 1);
-    range.endDate = new Date(2020, 12, 31);
+    range.date = new Date(2020, 2, 1);
+    range.endDate = new Date(2020, 3, 31);
     range.axisFill.fill = chart.colors.getIndex(7);
     range.axisFill.fillOpacity = 0.2;
-
     range.label.text = 'Наибольшие потери';
     range.label.inside = true;
     range.label.rotation = 90;
@@ -89,7 +98,6 @@ const StackedAreaChart = () => {
     chart.cursor.xAxis = dateAxis;
     chart.scrollbarX = new am4core.Scrollbar();
     chart.legend = new am4charts.Legend();
-    chart.legend.position = 'top';
 
     return () => {
       chart.dispose();
@@ -97,7 +105,7 @@ const StackedAreaChart = () => {
   }, [chartData])
 
   return (
-    <Card title="Пособия" bordered={false}>
+    <Card bordered={false}>
       <div id="stackedAreaChart" style={{width: '100%', height: '600px'}} />
     </Card>
   )

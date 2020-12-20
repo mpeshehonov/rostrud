@@ -4,6 +4,7 @@ import {Button, Layout} from 'antd';
 import Header from '../Header';
 import './PageLayout.scss';
 import {ArrowLeftOutlined} from '@ant-design/icons';
+import InfoButton from '../InfoButton';
 
 
 const PageLayout = ({children}) => {
@@ -28,7 +29,8 @@ const PageLayout = ({children}) => {
           </Layout.Content>
         </Layout>
         <Layout.Footer style={{textAlign: 'center'}}>
-          Pandemic Data Hack x NOVA ©2020
+          Pandemic Data Hack x NOVA ©2020.
+          <InfoButton/>
         </Layout.Footer>
       </Layout>
     </>
