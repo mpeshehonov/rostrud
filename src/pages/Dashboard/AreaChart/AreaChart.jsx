@@ -28,10 +28,12 @@ const AreaChart = () => {
     title.textAlign = 'middle';
 
     let dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+    dateAxis.title.text = 'Период';
     dateAxis.renderer.grid.template.location = 0;
     dateAxis.renderer.minGridDistance = 50;
 
-    let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+    let valueAxis = chart.yAxes.push(new am4charts.ValueAxis())
+    valueAxis.title.text = 'Количество';
 
     let series = chart.series.push(new am4charts.LineSeries());
     series.dataFields.dateX = 'date';

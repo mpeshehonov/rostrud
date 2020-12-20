@@ -22,11 +22,12 @@ const StackedAreaChart = () => {
     chart.data = chartData;
 
     let title = chart.titles.create();
-    title.text = '[bold font-size: 20]Пособия[/]';
+    title.text = '[bold font-size: 20]Информация по занятости[/]';
     title.textAlign = 'middle';
 
     chart.dateFormatter.inputDateFormat = 'MM.YYYY';
     const dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+    dateAxis.title.text = 'Период';
     dateAxis.renderer.minGridDistance = 60;
     dateAxis.startLocation = 0;
     dateAxis.endLocation = 1;
@@ -42,6 +43,8 @@ const StackedAreaChart = () => {
 
     const valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
     valueAxis.tooltip.disabled = true;
+    valueAxis.title.text = 'Количество';
+
 
     const series = chart.series.push(new am4charts.LineSeries());
     series.dataFields.dateX = 'date';
@@ -57,7 +60,7 @@ const StackedAreaChart = () => {
     series.strokeWidth = 2;
 
     const series2 = chart.series.push(new am4charts.LineSeries());
-    series2.name = 'Пособие';
+    series2.name = 'Незанятые';
     series2.dataFields.dateX = 'date';
     series2.dataFields.valueY = 'not_work';
     series2.tooltipText = '[#000]{valueY.value}[/]';
@@ -70,7 +73,7 @@ const StackedAreaChart = () => {
     series2.strokeWidth = 2;
 
     const series3 = chart.series.push(new am4charts.LineSeries());
-    series3.name = 'Незанятые';
+    series3.name = 'Нет информации';
     series3.dataFields.dateX = 'date';
     series3.dataFields.valueY = 'no_info';
     series3.tooltipText = '[#000]{valueY.value}[/]';

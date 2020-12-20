@@ -31,6 +31,13 @@ const TagCloudChart = () => {
     series.dataFields.word = 'profession';
     series.dataFields.value = 'count';
     series.labels.template.tooltipText = '{word}: {value}';
+    series.accuracy = 4;
+    series.step = 15;
+    series.rotationThreshold = 0.7;
+    series.maxCount = 200;
+    series.minWordLength = 2;
+    series.labels.template.margin(4,4,4,4);
+    series.maxFontSize = am4core.percent(30);
 
     series.heatRules.push({
       'target': series.labels.template,

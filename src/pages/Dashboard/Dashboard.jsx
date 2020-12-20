@@ -9,6 +9,7 @@ import locale from 'antd/lib/locale/ru_RU';
 import RadarChart from './RadarChart';
 import AreaChart from './AreaChart';
 import TreeMapChart from './TreeMapChart';
+import BubbleChart from './BubbleChart';
 
 const { RangePicker } = DatePicker;
 const monthFormat = 'MM.YYYY';
@@ -41,7 +42,10 @@ const Dashboard = () => {
         </Col>
       </Row>
       <Row>
-        <Col span={24}>
+        <Col span={12}>
+          <BubbleChart/>
+        </Col>
+        <Col span={12}>
           <TreeMapChart/>
         </Col>
       </Row>
